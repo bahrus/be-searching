@@ -5,13 +5,17 @@ export class BeSearchingController {
     intro(proxy, target, beDecorProps) {
         this.#ifWantsToBe = beDecorProps.ifWantsToBe;
     }
-    onSearchParams({ tag, proxy, forText }) {
+    onSearchParams({ tag, proxy, forText, caseSensitive }) {
         console.log(tag);
         //first remove all non-matching mark tags 
         const rn = proxy.getRootNode();
         const marks = rn.querySelectorAll(`${tag}[data-from-${this.#ifWantsToBe}]`);
         marks.forEach(m => {
-            const tc = m.textContent;
+            let tc = m.textContent;
+            if (!caseSensitive) {
+                tc = tc.toLowerCase();
+                forText = forText.toLowerCase();
+            }
             if (tc.indexOf(forText) === -1) {
                 m.insertAdjacentText('afterend', tc);
                 m.remove();
