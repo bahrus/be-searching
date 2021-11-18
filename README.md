@@ -65,6 +65,9 @@ generates:
 caseSensitive
 regex
 wholeWord
+vigilantly
+
+vigilantly will add a mutation observer.
 
 
 
