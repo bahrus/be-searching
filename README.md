@@ -39,7 +39,26 @@ generates:
 </div>
 ```
 
-Tied to search input
+## Example 3 Tied to search input
+
+```html
+<input type=search value=calif>
+
+<div be-searching='{
+    "forValueFrom": "input", 
+}>
+    Supercalifragilisticexpialidocious
+</div>
+
+```
+
+generates:
+
+```html
+<div be-searching=calif>
+    Super<mark>calif</mark>ragilisticexpialidocious
+</div>
+```
 
 Other options:
 
