@@ -63,7 +63,7 @@ generates:
 </div>
 ```
 
-## Other boolean options:
+## Other boolean options: [TODO]
 
 caseSensitive
 regex
