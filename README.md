@@ -1,4 +1,4 @@
-# be-searching [TODO]
+# be-searching 
 
 ## Example 1 -- minimal
 
@@ -33,13 +33,16 @@ generates:
 ```html
 <div be-searching='{
     "forText": "calif",
-    "class": "hilite"
+    "tag": "span",
+    "attribs": {
+        "class": "hilite"
+    },
 }'>
     Super<span class=hilite>calif</span>ragilisticexpialidocious
 </div>
 ```
 
-## Example 3 Tied to search input
+## Example 3 Tied to search input [TODO]
 
 ```html
 <input type=search value=calif>

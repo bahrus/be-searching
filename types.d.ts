@@ -4,7 +4,7 @@ import {IObserve} from 'be-observant/types';
 export interface BeSearchingVirtualProps{
     forText: string,
     forValueFrom: IObserve,
-    class: string,
+    attribs: {[key: string]: string},
     tag: string,
     caseSensitive: boolean,
     regex: boolean,
