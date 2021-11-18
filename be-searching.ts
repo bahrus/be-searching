@@ -4,8 +4,41 @@ import {hookUp} from 'be-observant/hookUp.js';
 import {register} from 'be-hive/register.js';
 
 export class BeSearchingController implements BeSearchingActions{
-    onSearchParams({tag}: this){
+    #ifWantsToBe!: string;
+
+    intro(proxy: HTMLTemplateElement & BeSearchingVirtualProps, target: HTMLTemplateElement, beDecorProps: BeDecoratedProps){
+        this.#ifWantsToBe = beDecorProps.ifWantsToBe;
+    }
+
+    onSearchParams({tag, proxy, forText}: this){
         console.log(tag);
+        
+        //first remove all non-matching mark tags 
+        const rn = proxy.getRootNode() as DocumentFragment;
+        const marks = rn.querySelectorAll(`${tag}[data-from-${this.#ifWantsToBe}]`);
+        marks.forEach(m => {
+            const tc = m.textContent!;
+            if(tc.indexOf(forText) === -1){
+                m.insertAdjacentText('afterend', tc);
+                m.remove();
+            }
+        });
+        proxy.childNodes.forEach(child => {
+            if(child.nodeType === Node.TEXT_NODE){
+                const tc = child.textContent!;
+                const iPos = tc.indexOf(forText);
+                if(iPos !== -1){
+                    const range = document.createRange();
+                    range.setStart(child, iPos);
+                    range.setEnd(child, iPos + forText.length);
+                    
+                    const contents = range.extractContents();
+                    const mark = document.createElement(tag);
+                    mark.textContent = contents.textContent!;
+                    range.insertNode(mark);
+                }
+            }
+        });
     }
 
     onForValueFrom({}: this){
@@ -26,8 +59,9 @@ define<BeSearchingProps & BeDecoratedProps<BeSearchingProps, BeSearchingActions>
         propDefaults:{
             upgrade,
             ifWantsToBe,
-            virtualProps: ['beVigilant', 'caseSensitive', 'class', 'for', 'forValueFrom', 'regex', 'tag', 'wholeWord'],
-            primaryProp: 'for',
+            virtualProps: ['beVigilant', 'caseSensitive', 'class', 'forText', 'forValueFrom', 'regex', 'tag', 'wholeWord'],
+            primaryProp: 'forText',
+            intro: 'intro',
             proxyPropDefaults:{
                 tag: 'mark',
                 class: 'highlight'
@@ -35,7 +69,7 @@ define<BeSearchingProps & BeDecoratedProps<BeSearchingProps, BeSearchingActions>
         },
         actions:{
             onSearchParams:{
-                ifAllOf: ['for'],
+                ifAllOf: ['forText'],
                 ifKeyIn: ['class', 'tag', 'caseSensitive', 'regex', 'wholeWord'],
             }
         }

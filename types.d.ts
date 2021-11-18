@@ -2,7 +2,7 @@ import {BeDecoratedProps} from 'be-decorated/types';
 import {IObserve} from 'be-observant/types';
 
 export interface BeSearchingVirtualProps{
-    for: string,
+    forText: string,
     forValueFrom: IObserve,
     class: string,
     tag: string,
@@ -19,5 +19,6 @@ export interface BeSearchingProps extends BeSearchingVirtualProps{
 export interface BeSearchingActions{
     onSearchParams(self: this): void;
     onForValueFrom(self: this): void;
+    intro(proxy: HTMLTemplateElement & BeSearchingVirtualProps, target: HTMLTemplateElement, beDecorProps: BeDecoratedProps): void;
 }
 

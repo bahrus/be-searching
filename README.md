@@ -12,7 +12,7 @@ generates:
 
 ```html
 <div be-searching=calif>
-    Super<mark>calif</mark>ragilisticexpialidocious
+    Super<mark data-from=be-searching>calif</mark>ragilisticexpialidocious
 </div>
 ```
 
@@ -20,7 +20,7 @@ generates:
 
 ```html
 <div be-searching='{
-    "for": "calif",
+    "forText": "calif",
     "class": "hilite",
     "tag": "span"
 }'>
@@ -32,7 +32,7 @@ generates:
 
 ```html
 <div be-searching='{
-    "for": "calif",
+    "forText": "calif",
     "class": "hilite"
 }'>
     Super<span class=hilite>calif</span>ragilisticexpialidocious
@@ -66,6 +66,7 @@ caseSensitive
 regex
 wholeWord
 beVigilant
+recursive
 
 beVigilant will add a mutation observer.
 
