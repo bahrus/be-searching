@@ -60,7 +60,7 @@ generates:
 </div>
 ```
 
-Other options:
+## Other boolean options:
 
 caseSensitive
 regex
