@@ -4,8 +4,8 @@ import {hookUp} from 'be-observant/hookUp.js';
 import {register} from 'be-hive/register.js';
 
 export class BeSearchingController implements BeSearchingActions{
-    onSearchParams({}: this){
-
+    onSearchParams({tag}: this){
+        console.log(tag);
     }
 
     onForValueFrom({}: this){
@@ -28,6 +28,10 @@ define<BeSearchingProps & BeDecoratedProps<BeSearchingProps, BeSearchingActions>
             ifWantsToBe,
             virtualProps: ['beVigilant', 'caseSensitive', 'class', 'for', 'forValueFrom', 'regex', 'tag', 'wholeWord'],
             primaryProp: 'for',
+            proxyPropDefaults:{
+                tag: 'mark',
+                class: 'highlight'
+            }
         },
         actions:{
             onSearchParams:{
@@ -35,5 +39,9 @@ define<BeSearchingProps & BeDecoratedProps<BeSearchingProps, BeSearchingActions>
                 ifKeyIn: ['class', 'tag', 'caseSensitive', 'regex', 'wholeWord'],
             }
         }
+    },
+    complexPropDefaults:{
+        controller: BeSearchingController,
     }
 });
+register(ifWantsToBe, upgrade, tagName);
