@@ -42,7 +42,7 @@ generates:
 </div>
 ```
 
-## Example 3 Tied to search input [TODO]
+## Example 3 Tied to search input
 
 ```html
 <input type=search value=calif>
@@ -65,13 +65,13 @@ generates:
 </div>
 ```
 
-## Other boolean options: [TODO]
+## Other boolean options: 
 
 caseSensitive
-regex
-wholeWord
-beVigilant
-recursive
+regex [TODO]
+wholeWord [TODO]
+beVigilant [TODO]
+recursive [TODO]
 
 beVigilant will add a mutation observer.
 
