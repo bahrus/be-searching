@@ -13,7 +13,7 @@
   "module": "be-searchable.js",
   "exports": {
     ".": "./be-searching.js",
-    "./be-switched.js": "./be-switched.js"
+    "./be-switched.js": "./be-searching.js"
   },
   "files": [
     "*.*"
