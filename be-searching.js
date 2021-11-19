@@ -1,4 +1,5 @@
 import { define } from 'be-decorated/be-decorated.js';
+import { hookUp } from 'be-observant/hookUp.js';
 import { register } from 'be-hive/register.js';
 export class BeSearchingController {
     #ifWantsToBe;
@@ -41,7 +42,8 @@ export class BeSearchingController {
             }
         });
     }
-    onForValueFrom({}) {
+    onForValueFrom({ forValueFrom, proxy }) {
+        hookUp(forValueFrom, proxy, 'forText');
     }
 }
 const tagName = 'be-searching';
@@ -64,6 +66,9 @@ define({
             onSearchParams: {
                 ifAllOf: ['forText'],
                 ifKeyIn: ['attribs', 'tag', 'caseSensitive', 'regex', 'wholeWord'],
+            },
+            onForValueFrom: {
+                ifAllOf: ['forValueFrom'],
             }
         }
     },

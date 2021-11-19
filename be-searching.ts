@@ -49,7 +49,8 @@ export class BeSearchingController implements BeSearchingActions{
         });
     }
 
-    onForValueFrom({}: this){
+    onForValueFrom({forValueFrom, proxy}: this){
+        hookUp(forValueFrom, proxy, 'forText');
     }
 }
 
@@ -78,6 +79,9 @@ define<BeSearchingProps & BeDecoratedProps<BeSearchingProps, BeSearchingActions>
             onSearchParams:{
                 ifAllOf: ['forText'],
                 ifKeyIn: ['attribs', 'tag', 'caseSensitive', 'regex', 'wholeWord'],
+            },
+            onForValueFrom:{
+                ifAllOf: ['forValueFrom'],
             }
         }
     },

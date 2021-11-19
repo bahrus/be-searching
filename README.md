@@ -48,7 +48,9 @@ generates:
 <input type=search value=calif>
 
 <div be-searching='{
-    "forValueFrom": "input", 
+    "forValueFrom": {
+        "observe": "input",
+    }, 
 }>
     Supercalifragilisticexpialidocious
 </div>
