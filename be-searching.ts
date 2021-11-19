@@ -23,7 +23,9 @@ export class BeSearchingController implements BeSearchingActions{
             }
             if(tc.indexOf(forTextModified) === -1){
                 m.insertAdjacentText('afterend', tc);
+                const parent = m.parentNode!;
                 m.remove();
+                parent.normalize();
             }
         });
         proxy.childNodes.forEach(child => {
@@ -37,6 +39,7 @@ export class BeSearchingController implements BeSearchingActions{
                     
                     const contents = range.extractContents();
                     const mark = document.createElement(tag);
+                    mark.setAttribute(`data-from-${this.#ifWantsToBe}`, '');
                     if(attribs !== undefined){
                         for(const key in attribs){
                             mark.setAttribute(key, attribs[key]);
