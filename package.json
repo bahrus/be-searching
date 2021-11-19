@@ -1,6 +1,6 @@
 {
   "name": "be-searching",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "keywords": [
     "web-components",
     "web-component",
@@ -11,11 +11,11 @@
   "description": "Made a DOM element searchable.",
   "main": "be-searchable.js",
   "module": "be-searchable.js",
-  "exports":{
+  "exports": {
     ".": "./be-searching.js",
     "./be-switched.js": "./be-switched.js"
   },
-  "files":[
+  "files": [
     "*.*"
   ],
   "types": "types.d.ts",
