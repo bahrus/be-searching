@@ -13,7 +13,7 @@ Made a DOM element searchable.
 generates:
 
 ```html
-<div be-searching=calif>
+<div is-searching=calif>
     Super<mark data-from=be-searching>calif</mark>ragilisticexpialidocious
 </div>
 ```
@@ -23,7 +23,9 @@ generates:
 ```html
 <div be-searching='{
     "forText": "calif",
-    "class": "hilite",
+    "attribs":{
+        "class": "hilite"
+    },
     "tag": "span"
 }'>
     Supercalifragilisticexpialidocious
@@ -33,12 +35,12 @@ generates:
 generates:
 
 ```html
-<div be-searching='{
+<div is-searching='{
     "forText": "calif",
-    "tag": "span",
-    "attribs": {
+        "attribs": {
         "class": "hilite"
     },
+    "tag": "span"
 }'>
     Super<span class=hilite>calif</span>ragilisticexpialidocious
 </div>
@@ -52,7 +54,7 @@ generates:
 <div be-searching='{
     "forValueFrom": {
         "observe": "input",
-    }, 
+    }
 }>
     Supercalifragilisticexpialidocious
 </div>
@@ -62,7 +64,11 @@ generates:
 generates:
 
 ```html
-<div be-searching=calif>
+<div is-searching='{
+    "forValueFrom": {
+        "observe": "input",
+    }
+}>
     Super<mark>calif</mark>ragilisticexpialidocious
 </div>
 ```
