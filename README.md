@@ -1,6 +1,6 @@
 # be-searching 
 
-Made a DOM element searchable.
+Make a DOM element searchable.
 
 ## Example 1 -- minimal
 
