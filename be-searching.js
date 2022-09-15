@@ -1,7 +1,7 @@
 import { define } from 'be-decorated/be-decorated.js';
 import { hookUp } from 'be-observant/hookUp.js';
 import { register } from 'be-hive/register.js';
-export class BeSearchingController {
+export class BeSearching {
     #ifWantsToBe;
     intro(proxy, target, beDecorProps) {
         this.#ifWantsToBe = beDecorProps.ifWantsToBe;
@@ -76,7 +76,7 @@ define({
         }
     },
     complexPropDefaults: {
-        controller: BeSearchingController,
+        controller: BeSearching,
     }
 });
 register(ifWantsToBe, upgrade, tagName);

@@ -1,24 +1,31 @@
-import {BeDecoratedProps} from 'be-decorated/types';
+import {BeDecoratedProps, MinimalProxy} from 'be-decorated/types';
 import {IObserve} from 'be-observant/types';
 
-export interface BeSearchingVirtualProps{
-    forText: string,
-    forValueFrom: IObserve,
-    attribs: {[key: string]: string},
-    tag: string,
-    caseSensitive: boolean,
-    regex: boolean,
-    wholeWord: boolean,
-    beVigilant: boolean,
+export interface EndUserProps{
+    forText?: string,
+    forValueFrom?: IObserve,
+    attribs?: {[key: string]: string},
+    tag?: string,
+    caseSensitive?: boolean,
+    regex?: boolean,
+    wholeWord?: boolean,
+    beVigilant?: boolean,
+}
+export interface VirtualProps extends EndUserProps, MinimalProxy{
+
 }
 
-export interface BeSearchingProps extends BeSearchingVirtualProps{
-    proxy: HTMLElement & BeSearchingVirtualProps;
+export type Proxy = Element & VirtualProps;
+
+export interface ProxyProps extends VirtualProps{
+    proxy: Proxy;
 }
 
-export interface BeSearchingActions{
-    onSearchParams(self: this): void;
-    onForValueFrom(self: this): void;
-    intro(proxy: HTMLTemplateElement & BeSearchingVirtualProps, target: HTMLTemplateElement, beDecorProps: BeDecoratedProps): void;
+export type PP = ProxyProps;
+
+export interface Actions{
+    onSearchParams(pp: PP): void;
+    onForValueFrom(pp: PP): void;
+    intro(proxy: Proxy, target: Element, beDecorProps: BeDecoratedProps): void;
 }
 

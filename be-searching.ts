@@ -1,21 +1,21 @@
 import {define, BeDecoratedProps} from 'be-decorated/be-decorated.js';
-import {BeSearchingVirtualProps, BeSearchingActions, BeSearchingProps} from './types';
+import {VirtualProps, Actions, Proxy, PP} from './types';
 import {hookUp} from 'be-observant/hookUp.js';
 import {register} from 'be-hive/register.js';
 
-export class BeSearchingController implements BeSearchingActions{
+export class BeSearching implements Actions{
     #ifWantsToBe!: string;
 
-    intro(proxy: HTMLTemplateElement & BeSearchingVirtualProps, target: HTMLTemplateElement, beDecorProps: BeDecoratedProps){
+    intro(proxy: Proxy, target: HTMLTemplateElement, beDecorProps: BeDecoratedProps){
         this.#ifWantsToBe = beDecorProps.ifWantsToBe;
     }
 
-    onSearchParams({tag, proxy, forText, caseSensitive, attribs}: this){
+    onSearchParams({tag, proxy, forText, caseSensitive, attribs}: PP){
         
         //first remove all non-matching mark tags 
         const rn = proxy.getRootNode() as DocumentFragment;
         const marks = rn.querySelectorAll(`${tag}[data-from-${this.#ifWantsToBe}]`);
-        const forTextModified = caseSensitive ? forText : forText.toLowerCase();
+        const forTextModified = caseSensitive ? forText! : forText!.toLowerCase();
         marks.forEach(m => {
             let tc = m.textContent!;
             if(!caseSensitive){
@@ -31,14 +31,14 @@ export class BeSearchingController implements BeSearchingActions{
         proxy.childNodes.forEach(child => {
             if(child.nodeType === Node.TEXT_NODE){
                 const tc = child.textContent!;
-                const iPos = tc.indexOf(forText);
+                const iPos = tc.indexOf(forText!);
                 if(iPos !== -1){
                     const range = document.createRange();
                     range.setStart(child, iPos);
-                    range.setEnd(child, iPos + forText.length);
+                    range.setEnd(child, iPos + forText!.length);
                     
                     const contents = range.extractContents();
-                    const mark = document.createElement(tag);
+                    const mark = document.createElement(tag!);
                     mark.setAttribute(`data-from-${this.#ifWantsToBe}`, '');
                     if(attribs !== undefined){
                         for(const key in attribs){
@@ -52,12 +52,11 @@ export class BeSearchingController implements BeSearchingActions{
         });
     }
 
-    onForValueFrom({forValueFrom, proxy}: this){
-        hookUp(forValueFrom, proxy, 'forText');
+    onForValueFrom({forValueFrom, proxy}: PP){
+        hookUp(forValueFrom!, proxy, 'forText');
     }
 }
 
-export interface BeSearchingController extends BeSearchingProps{}
 
 const tagName = 'be-searching';
 
@@ -65,7 +64,7 @@ const ifWantsToBe = 'searching';
 
 const upgrade = '*';
 
-define<BeSearchingProps & BeDecoratedProps<BeSearchingProps, BeSearchingActions>, BeSearchingActions>({
+define<Proxy & BeDecoratedProps<Proxy, Actions>, Actions>({
     config:{
         tagName,
         propDefaults:{
@@ -89,7 +88,7 @@ define<BeSearchingProps & BeDecoratedProps<BeSearchingProps, BeSearchingActions>
         }
     },
     complexPropDefaults:{
-        controller: BeSearchingController,
+        controller: BeSearching,
     }
 });
 register(ifWantsToBe, upgrade, tagName);
