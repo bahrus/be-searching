@@ -15,7 +15,7 @@ export class BeSearching implements Actions{
         //first remove all non-matching mark tags 
         //const rn = proxy.getRootNode() as DocumentFragment;
         const marks = self.querySelectorAll(`${tag}[data-from-${this.#ifWantsToBe}]`);
-        const forTextModified = caseSensitive ? forText! : forText!.toLowerCase();
+        //const forTextModified = caseSensitive ? forText! : forText!.toLowerCase();
         marks.forEach(m => {
             let tc = m.textContent!;
             // if(!caseSensitive){
@@ -28,7 +28,8 @@ export class BeSearching implements Actions{
                 parent.normalize();
             //}
         });
-        this.doSearch(self, forText!, tag!, attribs!);
+        if(!forText) return;
+        this.doSearch(self, forText, tag!, attribs!);
     }
 
     doSearch(el: Element, forText: string, tag: string, attribs: {[key: string]: string}){
@@ -85,8 +86,8 @@ define<Proxy & BeDecoratedProps<Proxy, Actions>, Actions>({
         },
         actions:{
             onSearchParams:{
-                ifAllOf: ['forText'],
-                ifKeyIn: ['attribs', 'tag', 'caseSensitive', 'regex', 'wholeWord'],
+                //ifAllOf: ['forText'],
+                ifKeyIn: ['forText', 'attribs', 'tag', 'caseSensitive', 'regex', 'wholeWord'],
             },
             onForValueFrom:{
                 ifAllOf: ['forValueFrom'],
