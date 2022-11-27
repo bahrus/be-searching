@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div be-searching=calif>
+        supercalifragilisticexpialidocious
+    </div>
+    <div be-searching='{
+        "forText": "calif",
+        "tag": "span",
+        "attribs": {
+            "class": "hilite"
+        }
+    }'>
+        supercalifragilisticexpialidocious
+    </div>
+
+    <input type=search>
+    
+    <div be-searching='{
+        "forValueFrom": {
+            "observe": "input",
+            "vft": "value",
+            "on": "input"
+        }
+    }'>
+        <div>
+            supercalifragilisticexpialidocious
+        </div>
+    </div>
+    <div id=target></div>
+        
+    <style>
+        .hilite{
+            color: orange;
+        }
+    </style>
+    <script type=importmap>
+        {
+            "imports": {
+                "trans-render/": "../node_modules/trans-render/",
+                "xtal-element/": "../node_modules/xtal-element/",
+                "be-decorated/": "../node_modules/be-decorated/",
+                "on-to-me/": "../node_modules/on-to-me/",
+                "be-observant/": "../node_modules/be-observant/",
+                "be-hive/":  "../node_modules/be-hive/"
+            }
+        }
+    </script>
+    <script type=module>
+        import '../be-searching.js';
+    </script>
+    <script>
+        function runTest(){
+            if(document.querySelector('mark').textContent === 'calif'){
+                target.setAttribute('mark', 'good');
+            }
+        }
+        setTimeout(() => {
+            runTest();
+        }, 2000);
+    </script>
+</body>
+</html>
