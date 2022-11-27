@@ -2,6 +2,11 @@
 
 Make a DOM element searchable.
 
+[![Playwright Tests](https://github.com/bahrus/be-searching/actions/workflows/CI.yml/badge.svg?branch=baseline)](https://github.com/bahrus/be-searching/actions/workflows/CI.yml)
+[![NPM version](https://badge.fury.io/js/be-searching.png)](http://badge.fury.io/js/be-searching)
+[![How big is this package in your project?](https://img.shields.io/bundlephobia/minzip/be-searching?style=for-the-badge)](https://bundlephobia.com/result?p=be-searching)
+<img src="http://img.badgesize.io/https://cdn.jsdelivr.net/npm/be-searching?compression=gzip">
+
 ## Example 1 -- minimal
 
 ```html
