@@ -1,6 +1,6 @@
 import {define, BeDecoratedProps} from 'be-decorated/DE.js';
 import {VirtualProps, Actions, Proxy, PP} from './types';
-import {hookUp} from 'be-observant/hookUp.js';
+
 import {register} from 'be-hive/register.js';
 
 export class BeSearching implements Actions{
@@ -52,7 +52,8 @@ export class BeSearching implements Actions{
         });
     }
 
-    onForValueFrom({forValueFrom, proxy}: PP){
+    async onForValueFrom({forValueFrom, proxy}: PP){
+        const {hookUp} = await import('be-observant/hookUp.js');
         hookUp(forValueFrom!, proxy, 'forText');
     }
 }

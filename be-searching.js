@@ -1,5 +1,4 @@
 import { define } from 'be-decorated/DE.js';
-import { hookUp } from 'be-observant/hookUp.js';
 import { register } from 'be-hive/register.js';
 export class BeSearching {
     #ifWantsToBe;
@@ -46,7 +45,8 @@ export class BeSearching {
             }
         });
     }
-    onForValueFrom({ forValueFrom, proxy }) {
+    async onForValueFrom({ forValueFrom, proxy }) {
+        const { hookUp } = await import('be-observant/hookUp.js');
         hookUp(forValueFrom, proxy, 'forText');
     }
 }
