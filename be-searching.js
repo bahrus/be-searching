@@ -7,30 +7,23 @@ export class BeSearching {
         this.#ifWantsToBe = beDecorProps.ifWantsToBe;
     }
     onSearchParams({ tag, proxy, forText, caseSensitive, attribs, self }) {
-        //first remove all non-matching mark tags 
-        //const rn = proxy.getRootNode() as DocumentFragment;
         const marks = self.querySelectorAll(`${tag}[data-from-${this.#ifWantsToBe}]`);
-        //const forTextModified = caseSensitive ? forText! : forText!.toLowerCase();
         marks.forEach(m => {
             let tc = m.textContent;
-            // if(!caseSensitive){
-            //     tc = tc.toLowerCase();
-            // }
-            //if(tc.indexOf(forTextModified) === -1){
             m.insertAdjacentText('afterend', tc);
             const parent = m.parentNode;
             m.remove();
             parent.normalize();
-            //}
         });
         if (!forText)
             return;
-        this.doSearch(self, forText, tag, attribs);
+        const modifiedForText = caseSensitive ? forText : forText.toLowerCase();
+        this.doSearch(self, modifiedForText, !!caseSensitive, tag, attribs);
     }
-    doSearch(el, forText, tag, attribs) {
+    doSearch(el, forText, caseSensitive, tag, attribs) {
         el.childNodes.forEach(child => {
             if (child.nodeType === Node.TEXT_NODE) {
-                const tc = child.textContent;
+                const tc = caseSensitive ? child.textContent : child.textContent.toLowerCase();
                 const iPos = tc.indexOf(forText);
                 if (iPos !== -1) {
                     const range = document.createRange();
@@ -49,7 +42,7 @@ export class BeSearching {
                 }
             }
             else if (child.nodeType === Node.ELEMENT_NODE) {
-                this.doSearch(child, forText, tag, attribs);
+                this.doSearch(child, forText, caseSensitive, tag, attribs);
             }
         });
     }
