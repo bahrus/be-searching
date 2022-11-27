@@ -1,4 +1,4 @@
-import {define, BeDecoratedProps} from 'be-decorated/be-decorated.js';
+import {define, BeDecoratedProps} from 'be-decorated/DE.js';
 import {VirtualProps, Actions, Proxy, PP} from './types';
 import {hookUp} from 'be-observant/hookUp.js';
 import {register} from 'be-hive/register.js';
@@ -10,11 +10,11 @@ export class BeSearching implements Actions{
         this.#ifWantsToBe = beDecorProps.ifWantsToBe;
     }
 
-    onSearchParams({tag, proxy, forText, caseSensitive, attribs}: PP){
+    onSearchParams({tag, proxy, forText, caseSensitive, attribs, self}: PP){
         
         //first remove all non-matching mark tags 
-        const rn = proxy.getRootNode() as DocumentFragment;
-        const marks = rn.querySelectorAll(`${tag}[data-from-${this.#ifWantsToBe}]`);
+        //const rn = proxy.getRootNode() as DocumentFragment;
+        const marks = self.querySelectorAll(`${tag}[data-from-${this.#ifWantsToBe}]`);
         const forTextModified = caseSensitive ? forText! : forText!.toLowerCase();
         marks.forEach(m => {
             let tc = m.textContent!;
@@ -28,7 +28,7 @@ export class BeSearching implements Actions{
                 parent.normalize();
             }
         });
-        proxy.childNodes.forEach(child => {
+        self.childNodes.forEach(child => {
             if(child.nodeType === Node.TEXT_NODE){
                 const tc = child.textContent!;
                 const iPos = tc.indexOf(forText!);
