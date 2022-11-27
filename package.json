@@ -9,8 +9,8 @@
     "search"
   ],
   "description": "Made a DOM element searchable.",
-  "main": "be-searchable.js",
-  "module": "be-searchable.js",
+  "main": "be-searching.js",
+  "module": "be-searching.js",
   "exports": {
     ".": "./be-searching.js",
     "./be-switched.js": "./be-searching.js"
