@@ -28,17 +28,21 @@ export class BeSearching implements Actions{
                 parent.normalize();
             }
         });
-        self.childNodes.forEach(child => {
+        this.doSearch(self, forText!, tag!, attribs!);
+    }
+
+    doSearch(el: Element, forText: string, tag: string, attribs: {[key: string]: string}){
+        el.childNodes.forEach(child => {
             if(child.nodeType === Node.TEXT_NODE){
                 const tc = child.textContent!;
-                const iPos = tc.indexOf(forText!);
+                const iPos = tc.indexOf(forText);
                 if(iPos !== -1){
                     const range = document.createRange();
                     range.setStart(child, iPos);
                     range.setEnd(child, iPos + forText!.length);
                     
                     const contents = range.extractContents();
-                    const mark = document.createElement(tag!);
+                    const mark = document.createElement(tag);
                     mark.setAttribute(`data-from-${this.#ifWantsToBe}`, '');
                     if(attribs !== undefined){
                         for(const key in attribs){
@@ -48,6 +52,8 @@ export class BeSearching implements Actions{
                     mark.textContent = contents.textContent!;
                     range.insertNode(mark);
                 }
+            }else if(child.nodeType === Node.ELEMENT_NODE){
+                this.doSearch(child as Element, forText, tag, attribs);
             }
         });
     }

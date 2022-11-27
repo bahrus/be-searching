@@ -23,7 +23,10 @@ export class BeSearching {
                 parent.normalize();
             }
         });
-        self.childNodes.forEach(child => {
+        this.doSearch(self, forText, tag, attribs);
+    }
+    doSearch(el, forText, tag, attribs) {
+        el.childNodes.forEach(child => {
             if (child.nodeType === Node.TEXT_NODE) {
                 const tc = child.textContent;
                 const iPos = tc.indexOf(forText);
@@ -42,6 +45,9 @@ export class BeSearching {
                     mark.textContent = contents.textContent;
                     range.insertNode(mark);
                 }
+            }
+            else if (child.nodeType === Node.ELEMENT_NODE) {
+                this.doSearch(child, forText, tag, attribs);
             }
         });
     }
