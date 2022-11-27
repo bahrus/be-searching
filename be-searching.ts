@@ -18,15 +18,15 @@ export class BeSearching implements Actions{
         const forTextModified = caseSensitive ? forText! : forText!.toLowerCase();
         marks.forEach(m => {
             let tc = m.textContent!;
-            if(!caseSensitive){
-                tc = tc.toLowerCase();
-            }
-            if(tc.indexOf(forTextModified) === -1){
+            // if(!caseSensitive){
+            //     tc = tc.toLowerCase();
+            // }
+            //if(tc.indexOf(forTextModified) === -1){
                 m.insertAdjacentText('afterend', tc);
                 const parent = m.parentNode!;
                 m.remove();
                 parent.normalize();
-            }
+            //}
         });
         this.doSearch(self, forText!, tag!, attribs!);
     }
