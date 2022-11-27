@@ -21,7 +21,7 @@
   "types": "types.d.ts",
   "dependencies": {
     "be-observant": "0.0.160",
-    "be-decorated": "0.0.204",
+    "be-decorated": "0.0.205",
     "be-hive": "0.0.78"
   },
   "devDependencies": {
