@@ -9,11 +9,9 @@
 		"watch": true
 	},
 	"files": [
-		"be-searching.ts"
+		"be-searching2.ts"
 	],
 	"exclude":[
-		"build",
-		"bower_components",
 		"node_modules"
 	]
 

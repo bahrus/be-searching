@@ -42,7 +42,7 @@ generates:
 ```html
 <div is-searching='{
     "forText": "calif",
-        "attribs": {
+    "attribs": {
         "class": "hilite"
     },
     "tag": "span"
@@ -50,6 +50,19 @@ generates:
     Super<span class=hilite>calif</span>ragilisticexpialidocious
 </div>
 ```
+
+```html
+<input type=search value=calif>
+
+...
+<div be-searching
+be-linked='
+    On input event of previous input element pass value property to for text property of be-searching enhancement of adorned element.
+'
+>
+</div>
+```
+
 
 ## Example 3 Tied to search input
 

@@ -1,9 +1,9 @@
-import {BeDecoratedProps, MinimalProxy} from 'be-decorated/types';
-import {IObserve} from 'be-observant/types';
+import { ActionOnEventConfigs } from "trans-render/froop/types";
+import {IBE} from 'be-enhanced/types';
 
-export interface EndUserProps{
+export interface EndUserProps extends IBE{
     forText?: string,
-    forValueFrom?: IObserve,
+    // forValueFrom?: IObserve,
     attribs?: {[key: string]: string},
     tag?: string,
     caseSensitive?: boolean,
@@ -11,21 +11,20 @@ export interface EndUserProps{
     wholeWord?: boolean,
     beVigilant?: boolean,
 }
-export interface VirtualProps extends EndUserProps, MinimalProxy{
+export interface AllProps extends EndUserProps{}
 
-}
+export type AP = AllProps;
 
-export type Proxy = Element & VirtualProps;
+export type PAP = Partial<AP>;
 
-export interface ProxyProps extends VirtualProps{
-    proxy: Proxy;
-}
+export type ProPAP = Promise<PAP>;
 
-export type PP = ProxyProps;
+export type POA = [PAP | undefined, ActionOnEventConfigs<PAP, Actions>];
+
 
 export interface Actions{
-    onSearchParams(pp: PP): void;
-    onForValueFrom(pp: PP): void;
-    intro(proxy: Proxy, target: Element, beDecorProps: BeDecoratedProps): void;
+    onSearchParams(self: this): PAP;
+    //onForValueFrom(self: this): void;
+    //intro(proxy: Proxy, target: Element, beDecorProps: BeDecoratedProps): void;
 }
 
