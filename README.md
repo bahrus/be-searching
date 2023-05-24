@@ -18,7 +18,7 @@ Make a DOM element searchable.
 generates:
 
 ```html
-<div is-searching=calif>
+<div be-searching=calif>
     Super<mark data-from=be-searching>calif</mark>ragilisticexpialidocious
 </div>
 ```
@@ -40,7 +40,7 @@ generates:
 generates:
 
 ```html
-<div is-searching='{
+<div be-searching='{
     "forText": "calif",
     "attribs": {
         "class": "hilite"
@@ -51,31 +51,30 @@ generates:
 </div>
 ```
 
-```html
-<input type=search value=calif>
+## JSON-in-html?
 
-...
-<div be-searching
-be-linked='
-    On input event of previous input element pass value property to for text property of be-searching enhancement of adorned element.
-'
->
-</div>
-```
-
+Editing JSON-in-html can be rather error prone.  A [VS Code extension](https://marketplace.visualstudio.com/items?itemName=andersonbruceb.json-in-html) is available to help with that, and is compatible with web versions of VSCode.
 
 ## Example 3 Tied to search input
 
-```html
-<input type=search value=calif>
+Use be-searching in partnership with [be-linked](https://github.com/bahrus/be-linked).
 
-<div be-searching='{
-    "forValueFrom": {
-        "observe": "input",
-    }
-}>
-    Supercalifragilisticexpialidocious
-</div>
+```html
+    <input type=search>
+    
+    <div 
+        be-linked='{
+            "enh": {
+                "beSearching": {
+                    "forText": ""
+                }
+            }
+        }
+        On input event of previous element sibling pass value property to forText.
+    '>
+    <div>
+        supercalifragilisticexpialidocious
+    </div>
 
 ```
 
@@ -100,6 +99,27 @@ beVigilant [TODO]
 recursive [TODO]
 
 beVigilant will add a mutation observer.
+
+## Running locally
+
+1.  Do a git clone or a git fork of repository https://github.com/bahrus/be-searching
+2.  Install node.js
+3.  Run "npm install" from location of folder created in step 1.
+4.  Run npm run serve.  Open browser to http://localhost:3030/demo/
+
+## Using from ESM Module:
+
+```JavaScript
+import 'be-searching/be-searching.js';
+```
+
+## Using from CDN:
+
+```html
+<script type=module crossorigin=anonymous>
+    import 'https://esm.run/be-searching';
+</script>
+```
 
 
 

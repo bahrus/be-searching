@@ -4,9 +4,6 @@ import {XE} from 'xtal-element/XE.js';
 import {Actions, AllProps, AP, PAP, ProPAP, POA, keyLookup} from './types';
 import {register} from 'be-hive/register.js';
 
-const beSearching = {
-    forText: '$09'
-} as keyLookup
 
 export class BeSearching extends BE<AP, Actions> implements Actions{
     static  override get beConfig(){

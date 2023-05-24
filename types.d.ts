@@ -13,11 +13,8 @@ export interface EndUserProps{
     beVigilant?: boolean,
 }
 
-export type keys = `${keyof EndUserProps}`;
+export type keys = keyof EndUserProps;
 
-// export interface keyLookup  {
-//     [key: keys]: string,
-// }
 
 type keyLookup = {
     [Property in keys]?: string;
