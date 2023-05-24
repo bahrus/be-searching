@@ -7,16 +7,20 @@
     <title>Document</title>
 </head>
 <body>
-    <div be-searching=calif>
-        supercalifragilisticexpialidocious
-    </div>
-    <div be-searching='{
-        "forText": "calif",
-        "tag": "span",
-        "attribs": {
-            "class": "hilite"
+
+    <input type=search>
+    
+    <div 
+        be-linked='{
+            "enh": {
+                "beSearching": {
+                    "forText": ""
+                }
+            }
         }
-    }'>
+        On input event of previous element sibling pass value property to forText.
+    '>
+    <div>
         supercalifragilisticexpialidocious
     </div>
         
@@ -31,6 +35,7 @@
             "imports": {
                 "be-enhanced/": "../node_modules/be-enhanced/",
                 "be-hive/":  "../node_modules/be-hive/",
+                "be-linked/": "../node_modules/be-linked/",
                 "trans-render/": "../node_modules/trans-render/",
                 "xtal-element/": "../node_modules/xtal-element/"
             }
@@ -38,7 +43,7 @@
     </script>
     <script type=module>
         import '../be-searching.js';
-        
+        import 'be-linked/be-linked.js';
     </script>
 </body>
 </html>

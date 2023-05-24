@@ -9,7 +9,7 @@
 		"watch": true
 	},
 	"files": [
-		"be-searching2.ts"
+		"be-searching.ts"
 	],
 	"exclude":[
 		"node_modules"

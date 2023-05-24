@@ -1,12 +1,19 @@
-import { define } from 'be-decorated/DE.js';
+import { BE, propDefaults, propInfo } from 'be-enhanced/BE.js';
+import { XE } from 'xtal-element/XE.js';
 import { register } from 'be-hive/register.js';
-export class BeSearching {
-    #ifWantsToBe;
-    intro(proxy, target, beDecorProps) {
-        this.#ifWantsToBe = beDecorProps.ifWantsToBe;
+const beSearching = {
+    forText: '$09'
+};
+export class BeSearching extends BE {
+    static get beConfig() {
+        return {
+            parse: true,
+            primaryProp: 'forText'
+        };
     }
-    onSearchParams({ tag, proxy, forText, caseSensitive, attribs, self }) {
-        const marks = self.querySelectorAll(`${tag}[data-from-${this.#ifWantsToBe}]`);
+    onSearchParams(self) {
+        const { tag, forText, caseSensitive, attribs, enhancedElement } = self;
+        const marks = enhancedElement.querySelectorAll(`${tag}[data-from-be-searching]`);
         marks.forEach(m => {
             let tc = m.textContent;
             m.insertAdjacentText('afterend', tc);
@@ -15,9 +22,12 @@ export class BeSearching {
             parent.normalize();
         });
         if (!forText)
-            return;
+            return { resolved: true };
         const modifiedForText = caseSensitive ? forText : forText.toLowerCase();
-        this.doSearch(self, modifiedForText, !!caseSensitive, tag, attribs);
+        this.doSearch(enhancedElement, modifiedForText, !!caseSensitive, tag, attribs);
+        return {
+            resolved: true
+        };
     }
     doSearch(el, forText, caseSensitive, tag, attribs) {
         el.childNodes.forEach(child => {
@@ -30,7 +40,7 @@ export class BeSearching {
                     range.setEnd(child, iPos + forText.length);
                     const contents = range.extractContents();
                     const mark = document.createElement(tag);
-                    mark.setAttribute(`data-from-${this.#ifWantsToBe}`, '');
+                    mark.setAttribute(`data-from-be-searching`, '');
                     if (attribs !== undefined) {
                         for (const key in attribs) {
                             mark.setAttribute(key, attribs[key]);
@@ -45,39 +55,34 @@ export class BeSearching {
             }
         });
     }
-    async onForValueFrom({ forValueFrom, proxy }) {
-        const { hookUp } = await import('be-observant/hookUp.js');
-        hookUp(forValueFrom, proxy, 'forText');
-    }
 }
 const tagName = 'be-searching';
 const ifWantsToBe = 'searching';
 const upgrade = '*';
-define({
+const xe = new XE({
     config: {
         tagName,
         propDefaults: {
-            upgrade,
-            ifWantsToBe,
-            virtualProps: ['beVigilant', 'caseSensitive', 'attribs', 'forText', 'forValueFrom', 'regex', 'tag', 'wholeWord'],
-            primaryProp: 'forText',
-            intro: 'intro',
-            proxyPropDefaults: {
-                tag: 'mark',
-            }
+            ...propDefaults,
+            tag: 'mark',
+            beVigilant: false,
+            caseSensitive: false,
+            attribs: {},
+            forText: '',
+            wholeWord: false,
+        },
+        propInfo: {
+            ...propInfo
         },
         actions: {
             onSearchParams: {
-                //ifAllOf: ['forText'],
-                ifKeyIn: ['forText', 'attribs', 'tag', 'caseSensitive', 'regex', 'wholeWord'],
-            },
-            onForValueFrom: {
-                ifAllOf: ['forValueFrom'],
+                ifKeyIn: [
+                    'forText', 'attribs', 'tag', 'caseSensitive',
+                    'regex', 'wholeWord'
+                ]
             }
         }
     },
-    complexPropDefaults: {
-        controller: BeSearching,
-    }
+    superclass: BeSearching
 });
 register(ifWantsToBe, upgrade, tagName);

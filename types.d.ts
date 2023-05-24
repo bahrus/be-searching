@@ -1,7 +1,8 @@
 import { ActionOnEventConfigs } from "trans-render/froop/types";
 import {IBE} from 'be-enhanced/types';
 
-export interface EndUserProps extends IBE{
+
+export interface EndUserProps{
     forText?: string,
     // forValueFrom?: IObserve,
     attribs?: {[key: string]: string},
@@ -11,7 +12,18 @@ export interface EndUserProps extends IBE{
     wholeWord?: boolean,
     beVigilant?: boolean,
 }
-export interface AllProps extends EndUserProps{}
+
+export type keys = `${keyof EndUserProps}`;
+
+// export interface keyLookup  {
+//     [key: keys]: string,
+// }
+
+type keyLookup = {
+    [Property in keys]?: string;
+};
+
+export interface AllProps extends EndUserProps, IBE{}
 
 export type AP = AllProps;
 
