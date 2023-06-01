@@ -63,14 +63,8 @@ Use be-searching in partnership with [be-linked](https://github.com/bahrus/be-li
     <input type=search>
     
     <div 
-        be-linked='{
-            "enh": {
-                "beSearching": {
-                    "forText": ""
-                }
-            }
-        }
-        On input event of previous element sibling pass value property to forText.
+        be-linked='
+        On input event of previous element sibling pass value property to $0-enh-by-be-searching => for text.
     '>
     <div>
         supercalifragilisticexpialidocious
