@@ -64,8 +64,9 @@ Use be-searching in partnership with [be-linked](https://github.com/bahrus/be-li
     
     <div 
         be-linked='
-        On input event of previous element sibling pass value property to $0-enh-by-be-searching:forText.
-    '>
+            On input event of previous element sibling pass value property to $0-enh-by-be-searching:forText.
+        '
+    >
     <div>
         supercalifragilisticexpialidocious
     </div>
@@ -110,6 +111,8 @@ recursive [TODO]
 beVigilant will add a mutation observer.
 
 ## Running locally
+
+Any web server that can serve static files will do but...
 
 1.  Do a git clone or a git fork of repository https://github.com/bahrus/be-searching
 2.  Install node.js
