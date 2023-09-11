@@ -84,6 +84,21 @@ generates:
 </div>
 ```
 
+If you prefer small, byte sized words:
+
+```html
+    <input type=search>
+    
+    <div 
+        be-linked='
+        On input event of previous element sibling pass value property to $0-enh-by-be-searching : for text.
+    '>
+    <div>
+        supercalifragilisticexpialidocious
+    </div>
+
+```
+
 ## Other boolean options: 
 
 caseSensitive
