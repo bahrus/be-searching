@@ -30,7 +30,7 @@
     "@playwright/test": "1.42.1",
     "may-it-serve": "0.0.6",
     "be-linked": "0.0.76",
-    "be-observant": "0.0.175"
+    "be-observant": "0.0.176"
   },
   "scripts": {
     "serve": "node node_modules/may-it-serve/serve.js",
