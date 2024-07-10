@@ -1,4 +1,4 @@
-# be-searching 
+# be-searching (🔎)
 
 Make a DOM element searchable.
 
